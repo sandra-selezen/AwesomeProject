@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
-import { Platform, StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
+import { Platform, StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity, KeyboardAvoidingView, Keyboard } from 'react-native';
 import bgImage from '../../../assets/images/bg-image.jpg';
 
 export const RegistrationScreen = () => {
   console.log(Platform.OS);
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const keyboardHide = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+  }
+
   return (
     <ImageBackground source={bgImage} style={styles.image}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
@@ -14,7 +19,7 @@ export const RegistrationScreen = () => {
               <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Логін' onFocus={() => setIsShowKeyboard(true)} />
               <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Адреса електронної пошти' keyboardType='email-address' onFocus={() => setIsShowKeyboard(true)} />
               <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Пароль' secureTextEntry={true} onFocus={() => setIsShowKeyboard(true)} />
-              <TouchableOpacity activeOpacity={0.7} style={styles.button}><Text style={styles.btnTitle}>Зареєструватися</Text></TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={keyboardHide}><Text style={styles.btnTitle}>Зареєструватися</Text></TouchableOpacity>
               <Text style={styles.loginBtn}>Вже є акаунт? Увійти</Text>
             </View>
           </View>
