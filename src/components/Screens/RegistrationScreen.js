@@ -1,20 +1,24 @@
-import { Platform, StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { Platform, StyleSheet, Text, View, ImageBackground, TextInput, TouchableOpacity, KeyboardAvoidingView } from 'react-native';
 import bgImage from '../../../assets/images/bg-image.jpg';
 
 export const RegistrationScreen = () => {
   console.log(Platform.OS);
+  const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   return (
     <ImageBackground source={bgImage} style={styles.image}>
-      <View style={styles.container}>
-        <Text style={styles.title}>Реєстрація</Text>
-        <View style={styles.form}>
-          <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Логін' />
-          <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Адреса електронної пошти' keyboardType='email-address' />
-          <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Пароль' secureTextEntry={true} />
-        </View>
-        <TouchableOpacity activeOpacity={0.7} style={styles.button}><Text style={styles.btnTitle}>Зареєструватися</Text></TouchableOpacity>
-        <Text style={styles.loginBtn}>Вже є акаунт? Увійти</Text>
-      </View>
+      <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+          <View style={{ ...styles.container, paddingBottom: isShowKeyboard ? 32 : 78 }}>
+            <Text style={styles.title}>Реєстрація</Text>
+            <View style={styles.form}>
+              <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Логін' onFocus={() => setIsShowKeyboard(true)} />
+              <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Адреса електронної пошти' keyboardType='email-address' onFocus={() => setIsShowKeyboard(true)} />
+              <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Пароль' secureTextEntry={true} onFocus={() => setIsShowKeyboard(true)} />
+              <TouchableOpacity activeOpacity={0.7} style={styles.button}><Text style={styles.btnTitle}>Зареєструватися</Text></TouchableOpacity>
+              <Text style={styles.loginBtn}>Вже є акаунт? Увійти</Text>
+            </View>
+          </View>
+      </KeyboardAvoidingView>
     </ImageBackground>
   );
 }
@@ -26,9 +30,9 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   container: {
+    paddingTop: 92,
     paddingLeft: 16,
     paddingRight: 16,
-    flex: 0.7,
     backgroundColor: '#fff',
     borderTopLeftRadius: 25,
     borderTopRightRadius: 25,
@@ -40,7 +44,6 @@ const styles = StyleSheet.create({
   },
   form: {
     rowGap: 16,
-    marginBottom: 43,
   },
   input: {
     padding: 16,
@@ -52,6 +55,8 @@ const styles = StyleSheet.create({
     borderRadius: 8,
   },
   button: {
+    marginTop: 27,
+    marginBottom: 16,
     padding: 16,
     backgroundColor: '#FF6C00',
     borderRadius: 100,
