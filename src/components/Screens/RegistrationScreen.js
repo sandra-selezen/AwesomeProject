@@ -8,9 +8,9 @@ export const RegistrationScreen = () => {
   return (
     <ImageBackground source={bgImage} style={styles.image}>
       <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-          <View style={{ ...styles.container, paddingBottom: isShowKeyboard ? 32 : 78 }}>
+          <View style={styles.container}>
             <Text style={styles.title}>Реєстрація</Text>
-            <View style={styles.form}>
+            <View style={{ ...styles.form, marginBottom: isShowKeyboard ? 32 : 78 }}>
               <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Логін' onFocus={() => setIsShowKeyboard(true)} />
               <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Адреса електронної пошти' keyboardType='email-address' onFocus={() => setIsShowKeyboard(true)} />
               <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Пароль' secureTextEntry={true} onFocus={() => setIsShowKeyboard(true)} />
