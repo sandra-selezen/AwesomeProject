@@ -13,14 +13,24 @@ import {
 } from 'react-native';
 import bgImage from '../../../assets/images/bg-image.jpg';
 
-export const RegistrationScreen = () => {
+const initialState = {
+  login: '',
+  email: '',
+  password: '',
+}
 
+export const RegistrationScreen = () => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
+  const [state, setState] = useState(initialState);
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
-  }
-
+  };
+  const onSubmitForm = () => {
+    setIsShowKeyboard(false);
+    Keyboard.dismiss();
+    setState(initialState);
+  };
   return (
     <ImageBackground source={bgImage} style={styles.image}>
       <TouchableWithoutFeedback onPress={keyboardHide}>
@@ -29,11 +39,11 @@ export const RegistrationScreen = () => {
             <Text style={styles.title}>Реєстрація</Text>
             <View style={styles.form}>
               <View style={styles.inputGroup}>
-                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Логін' onFocus={() => setIsShowKeyboard(true)} />
-                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Адреса електронної пошти' keyboardType='email-address' onFocus={() => setIsShowKeyboard(true)} />
-                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Пароль' secureTextEntry={true} onFocus={() => setIsShowKeyboard(true)} />
+                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Адреса електронної пошти' keyboardType='email-address' onFocus={() => setIsShowKeyboard(true)} value={state.login} onChangeText={(value) => setState((prevState) => ({ ...prevState, email: value }))} />
+                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Пароль' secureTextEntry={true} onFocus={() => setIsShowKeyboard(true)} value={state.email} onChangeText={(value) => setState((prevState) => ({ ...prevState, password: value }))} />
+                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Логін' onFocus={() => setIsShowKeyboard(true)} value={state.password} onChangeText={(value) => setState((prevState) => ({ ...prevState, login: value }))} />
               </View>
-              <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={keyboardHide}><Text style={styles.btnTitle}>Зареєструватися</Text></TouchableOpacity>
+              <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={onSubmitForm}><Text style={styles.btnTitle}>Зареєструватися</Text></TouchableOpacity>
               <Text style={styles.loginBtn}>Вже є акаунт? Увійти</Text>
             </View>
           </View>
