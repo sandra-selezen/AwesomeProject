@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Platform,
   StyleSheet,
@@ -9,7 +9,8 @@ import {
   TouchableOpacity,
   KeyboardAvoidingView,
   Keyboard,
-  TouchableWithoutFeedback
+  TouchableWithoutFeedback,
+  Dimensions
 } from 'react-native';
 import bgImage from '../../../assets/images/bg-image.jpg';
 
@@ -22,6 +23,18 @@ const initialState = {
 export const RegistrationScreen = () => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [state, setState] = useState(initialState);
+
+  useEffect(() => {
+    const onChangeOrientation = () => {
+      const width = Dimensions.get('window').width;
+      console.log('width', width);
+    }
+    Dimensions.addEventListener('change', onChangeOrientation);
+    return () => {
+      Dimensions.removeEventListener('change', onChangeOrientation);
+    };
+  }, []);
+
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
@@ -29,6 +42,7 @@ export const RegistrationScreen = () => {
   const onSubmitForm = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
+    console.log(state);
     setState(initialState);
   };
   return (
@@ -69,6 +83,7 @@ const styles = StyleSheet.create({
   },
   title: {
     marginBottom: 32,
+    fontFamily: 'Roboto-Medium',
     fontSize: 30,
     textAlign: 'center',
   },
@@ -81,6 +96,7 @@ const styles = StyleSheet.create({
   },
   input: {
     padding: 16,
+    fontFamily: 'Roboto-Regular',
     fontSize: 16,
     color: '#212121',
     backgroundColor: '#F6F6F6',
@@ -95,11 +111,13 @@ const styles = StyleSheet.create({
     borderRadius: 100,
   },
   btnTitle: {
+    fontFamily: 'Roboto-Regular',
     fontSize: 16,
     textAlign: 'center',
     color: '#fff',
   },
   loginBtn: {
+    fontFamily: 'Roboto-Regular',
     fontSize: 16,
     textAlign: 'center',
     color: '#1B4371',
