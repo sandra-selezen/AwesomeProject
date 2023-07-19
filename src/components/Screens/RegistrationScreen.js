@@ -30,9 +30,9 @@ export const RegistrationScreen = () => {
       console.log('width', width);
     }
     Dimensions.addEventListener('change', onChangeOrientation);
-    return () => {
-      Dimensions.removeEventListener('change', onChangeOrientation);
-    };
+    // return () => {
+    //   Dimensions.removeEventListener('change', onChangeOrientation);
+    // };
   }, []);
 
   const keyboardHide = () => {
