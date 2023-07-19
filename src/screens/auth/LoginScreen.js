@@ -51,7 +51,7 @@ export const LoginScreen = () => {
       <TouchableWithoutFeedback onPress={keyboardHide}>
         <KeyboardAvoidingView behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
           <View style={{ ...styles.container, paddingBottom: isShowKeyboard ? 32 : 78 }}>
-            <Text style={styles.title}>Реєстрація</Text>
+            <Text style={styles.title}>Увійти</Text>
             <View style={styles.form}>
               <View style={styles.inputGroup}>
                 <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Адреса електронної пошти' keyboardType='email-address' onFocus={() => setIsShowKeyboard(true)} value={formData.email} onChangeText={(value) => setFormData((prevState) => ({ ...prevState, email: value }))} />
