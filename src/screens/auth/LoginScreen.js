@@ -19,7 +19,7 @@ const initialState = {
   password: '',
 }
 
-export const LoginScreen = () => {
+const LoginScreen = () => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [formData, setFormData] = useState(initialState);
 
@@ -123,3 +123,5 @@ const styles = StyleSheet.create({
     color: '#1B4371',
   }
 });
+
+export default LoginScreen;
