@@ -15,12 +15,11 @@ import {
 import bgImage from '../../../assets/images/bg-image.jpg';
 
 const initialState = {
-  login: '',
   email: '',
   password: '',
 }
 
-export const RegistrationScreen = () => {
+export const LoginScreen = () => {
   const [isShowKeyboard, setIsShowKeyboard] = useState(false);
   const [formData, setFormData] = useState(initialState);
 
@@ -29,21 +28,22 @@ export const RegistrationScreen = () => {
       const width = Dimensions.get('window').width;
       console.log('width', width);
     }
-    Dimensions.addEventListener('change', onChangeOrientation);
-    // return () => {
-    //   Dimensions.removeEventListener('change', onChangeOrientation);
-    // };
+    const setupOrientation = Dimensions.addEventListener('change', onChangeOrientation);
+    return () => {
+      setupOrientation.remove();
+    };
   }, []);
 
   const keyboardHide = () => {
     setIsShowKeyboard(false);
     Keyboard.dismiss();
   };
+
   const onSubmitForm = () => {
     setIsShowKeyboard(false);
-    Keyboard.dismiss();
     console.log(formData);
     setFormData(initialState);
+    keyboardHide();
   };
 
   return (
@@ -54,7 +54,6 @@ export const RegistrationScreen = () => {
             <Text style={styles.title}>Реєстрація</Text>
             <View style={styles.form}>
               <View style={styles.inputGroup}>
-                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Логін' onFocus={() => setIsShowKeyboard(true)} value={formData.login} onChangeText={(value) => setFormData((prevState) => ({ ...prevState, login: value }))} />
                 <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Адреса електронної пошти' keyboardType='email-address' onFocus={() => setIsShowKeyboard(true)} value={formData.email} onChangeText={(value) => setFormData((prevState) => ({ ...prevState, email: value }))} />
                 <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Пароль' secureTextEntry={true} onFocus={() => setIsShowKeyboard(true)} value={formData.password} onChangeText={(value) => setFormData((prevState) => ({ ...prevState, password: value }))} />
               </View>
