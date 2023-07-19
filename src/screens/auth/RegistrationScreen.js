@@ -47,6 +47,8 @@ const RegistrationScreen = () => {
     keyboardHide();
   };
 
+  const { login, email, password } = formData;
+
   return (
     <ImageBackground source={bgImage} style={styles.image}>
       <TouchableWithoutFeedback onPress={keyboardHide}>
@@ -55,9 +57,9 @@ const RegistrationScreen = () => {
             <Text style={styles.title}>Реєстрація</Text>
             <View style={styles.form}>
               <View style={styles.inputGroup}>
-                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Логін' onFocus={() => setIsShowKeyboard(true)} value={formData.login} onChangeText={(value) => setFormData((prevState) => ({ ...prevState, login: value }))} />
-                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Адреса електронної пошти' keyboardType='email-address' onFocus={() => setIsShowKeyboard(true)} value={formData.email} onChangeText={(value) => setFormData((prevState) => ({ ...prevState, email: value }))} />
-                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Пароль' secureTextEntry={true} onFocus={() => setIsShowKeyboard(true)} value={formData.password} onChangeText={(value) => setFormData((prevState) => ({ ...prevState, password: value }))} />
+                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Логін' onFocus={() => setIsShowKeyboard(true)} value={login} onChangeText={(value) => setFormData((prevState) => ({ ...prevState, login: value }))} />
+                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Адреса електронної пошти' keyboardType='email-address' onFocus={() => setIsShowKeyboard(true)} value={email} onChangeText={(value) => setFormData((prevState) => ({ ...prevState, email: value }))} />
+                <TextInput style={styles.input} placeholderTextColor={'#BDBDBD'} placeholder='Пароль' onFocus={() => setIsShowKeyboard(true)} secureTextEntry={true} value={password} onChangeText={(value) => setFormData((prevState) => ({ ...prevState, password: value }))} />
               </View>
               <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={onSubmitForm}><Text style={styles.btnTitle}>Зареєструватися</Text></TouchableOpacity>
               <Text style={styles.loginBtn}>Вже є акаунт? Увійти</Text>
